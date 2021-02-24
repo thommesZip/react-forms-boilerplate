@@ -13,20 +13,28 @@ export function FieldWrapper(props) {
   };
 
   return (
-    <div className="field">
-      {label ? <label className="label">{label}</label> : null}
+    <div className={`field field-${name}`}>
+      {/* Here is the field label */}
+      {label ? (
+        <label className="label" htmlFor={name}>
+          {label}
+        </label>
+      ) : null}
       <div
         className={`control has-icons-right ${
           addClassesToField[fieldType] || ''
         }`}
       >
         {props.children}
+
+        {/* Here is the error icon */}
         {showIcons && errors[name] && touched[name] ? (
           <span className="icon is-small is-right has-text">
             <i className="material-icons">error_outline</i>
           </span>
         ) : null}
 
+        {/* Here is the success icon */}
         {showIcons &&
         !errors[name] &&
         touched[name] &&
@@ -38,6 +46,8 @@ export function FieldWrapper(props) {
           </>
         ) : null}
       </div>
+
+      {/* Here is the error message */}
       <div className="field-error">
         {errors[name] && touched[name] ? (
           <p className={`${helpMessageClass} ${inputErrorClass}`}>
@@ -54,7 +64,7 @@ export function LoadingIndicator() {
     <progress
       className="progress is-small is-primary"
       max="100"
-      style={{ position: 'absolute', top: 0, letf: 0 }}
+      style={{ position: 'absolute', top: 0, left: 0 }}
     ></progress>
   );
 }

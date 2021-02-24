@@ -1,12 +1,12 @@
 import React from 'react';
 import { Formik, Form as FormikForm } from 'formik';
 import { getFormSettings } from './utils';
-import Textarea from './TextArea';
-import SubmitButton from './SubmitButton';
-import TextField from './TextField';
-import SelectField from './SelectField';
-import CheckBox from './CheckBox';
-import RadioGroup from './RadioGroup';
+import Textarea from './textarea';
+import SubmitButton from './submit-button';
+import TextField from './text-field';
+import SelectField from './select-field';
+import CheckBox from './checkbox';
+import RadioGroup from './radio-group';
 import { LoadingIndicator } from './shared';
 
 function Form(props) {

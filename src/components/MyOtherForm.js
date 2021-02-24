@@ -1,12 +1,5 @@
 import React from 'react';
-
-import { Form, TextField, SubmitButton } from './Form';
-
-function sleep(delay) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
+import { Form, TextField, SubmitButton } from './form';
 
 export default function MyOtherForm(props) {
   const { data, disabled, isLoading } = props;
@@ -22,12 +15,6 @@ export default function MyOtherForm(props) {
         ],
         validationType: 'string', // default string
         // yup: e.g. Yup.string().required() -> override validations with Yup for more complex validations
-        required: true,
-      },
-      email: {
-        initialValue: formData?.email || '',
-        validations: [{ type: 'email', args: [] }],
-        validationType: 'string', // default string
         required: true,
       },
       date: {
@@ -63,7 +50,7 @@ export default function MyOtherForm(props) {
           isLoading={isLoading}
           disabled={disabled}
           onSubmit={async (values, actions) => {
-            await sleep(3000);
+            console.log('hi');
             alert(JSON.stringify(values, null, 2));
           }}
         >

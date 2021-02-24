@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export function createFieldSchema(field = {}) {
   const {
     required,
-    validations,
+    validations = [],
     validationType = 'string',
     yup,
   } = field;
