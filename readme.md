@@ -1,5 +1,8 @@
+![React Forms Boilerplate](./react-forms-bp.png "React Forms Boilerplate")
+
+
 # React Forms Boilerplate
-This is boilerplate code I like use to build & handle forms in React. Instead of trying to build the 💍ne abstraction to rule them all, I use this as a starting point that can handle 95% of my typical use cases out of the box and adjust or extend it according to what the app needs.
+This is boilerplate code I use to build & handle forms in React. Instead of trying to build the 💍ne abstraction to rule them all, I use this as a starting point that can handle 95% of my typical use cases out of the box and adjust or extend it according to what the app needs.
 
 It is structured to be easily adjustable, with all the elements that vary from app to app (but not within an app) in the shared.js file. (HTML-wrappers for fields according to Bootstrap, Tailwind CSS, Status-classNames etc.). 
 
@@ -35,8 +38,14 @@ const fieldSettings = {
   name: {
     initialValue: '',
     validations: [
-      { type: 'min', args: [2, 'Sorry, your name is too short.'] },
-      { type: 'max', args: [50, 'Sorry, your name is too long.'] },
+      { 
+        type: 'min', 
+        args: [2, 'Sorry, your name is too short.'] 
+      },
+      { 
+        type: 'max', 
+        args: [50, 'Sorry, your name is too long.'] 
+      },
     ],
     validationType: 'string',
     required: true,
