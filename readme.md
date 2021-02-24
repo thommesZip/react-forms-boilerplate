@@ -268,7 +268,7 @@ name="accept-something"
 
 ### YourCustomField
 
-If you need additional Field types, just use this as a boilerplate, do what you lile and export it from index.js.
+If you need additional Field types, just use this as a boilerplate, do what you like and export it from index.js.
 
 ```js
 import React from 'react';
