@@ -165,6 +165,21 @@ If you check the Yup documentation, this...
 
 ```
 
+And if you find it useful to create the Yup object yourself, just add a **yup** property, but don´t forget to import yup.
+
+```js
+import * as yup from 'yup';
+
+
+{
+  email: {
+    initialValue: 'test@gmail.com',
+    yup: yup.string().required().email('e.g. 🤬 A custom error message')
+  }
+}
+
+```
+
 ### disabled: Boolean && isLoading: Boolean 
 disabled: Optional (default false). Sets form disabled.
 
@@ -251,3 +266,33 @@ name="accept-something"
  <SubmitButton>Save</SubmitButton>
 ```
 
+### YourCustomField
+
+If you need additional Field types, just use this as a boilerplate, do what you lile and export it from index.js.
+
+```js
+import React from 'react';
+import { Field as FormikField, useFormikContext } from 'formik';
+import { FieldWrapper, inputErrorClass } from './shared';
+
+export default function YourCustomField(props) {
+
+  const { name, label, placeholder, ...rest } = props;
+  const { errors, touched, isSubmitting } = useFormikContext();
+
+  return (
+    <FieldWrapper {...props} fieldType="textfield">
+      <FormikField
+        {...rest}
+        id={name}
+        name={name}
+        disabled={isSubmitting}
+        placeholder={placeholder || ''}
+        className={`input is-rounded ${
+          errors[name] && touched[name] ? inputErrorClass : ''
+        } has-icons-right`}
+      />
+    </FieldWrapper>
+  );
+}
+```
