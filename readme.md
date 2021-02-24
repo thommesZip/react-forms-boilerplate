@@ -6,7 +6,9 @@ It is structured to be easily adjustable, with all the elements that vary from a
 Form and Fields are composable, just like if you would build form HTML and you can easily create new Field types.
 
 ## The goal...
-... is to have a consistent way of creating, handling and styling forms throughout the entire application with no effort. Of course this is highly opinionated, but that´s what makes it easy to use.
+... is to have a consistent way of creating, handling and styling forms throughout the entire application with no effort, especially for applications with tons of forms.
+
+It is basically <a href="https://formik.org/docs/api/formik" target="_blank">Formik</a> & <a href="https://github.com/jquense/yup" target="_blank">Yup</a> in wrapper to create consistent HTML around the fields plus some additional features I often use. Of course this is highly opinionated, but that´s what makes it easy to use.
 
 
 ### It does the following things:
@@ -21,6 +23,11 @@ Form and Fields are composable, just like if you would build form HTML and you c
 - accepts a submit handler
 
 
+Under the hood it uses <a href="https://formik.org/docs/api/formik" target="_blank">Formik</a> to manage the form state & <a href="https://github.com/jquense/yup" target="_blank">Yup</a> for the validation, but in most cases you can forget that.
+
+If you need some fancier validation logic that is difficult to build with the settings-object, you can provide a yup property and it will override the validations array. ([See here](#fieldSettings))
+
+
 ## Here is a simple example:
 
 ```js
@@ -28,8 +35,8 @@ const fieldSettings = {
   name: {
     initialValue: '',
     validations: [
-      { type: 'min', args: [2] },
-      { type: 'max', args: [50] },
+      { type: 'min', args: [2, 'Sorry, your name is too short.'] },
+      { type: 'max', args: [50, 'Sorry, your name is too long.'] },
     ],
     validationType: 'string',
     required: true,
@@ -62,17 +69,17 @@ function MyCustomForm(props) {
  
 ```
 
-Under the hood it uses <a hre="https://formik.org/docs/api/formik" target="_blank">Formik</a> to manage the form state & <a hre="https://github.com/jquense/yup" target="_blank">Yup</a> for the validation, but for most cases you can forget that and don´t have to import Formik and Yup everywhere.
-If you need some fancier validation logic that is difficult to build with the settings-object, you provide a yup property and it will override the validations array. 
 
 
 ## Initial Setup
-Open shared.js and change what you need.
+1) Copy src/components/form to your projects components
+2) Open shared.js and change what you need to match the HTML structure and CSS class names for your CSS to work
+
 
 ### <FieldWrapper \/> 
-The Fieldwrapper Component wraps all the Fields. Adjust to whatever HTML structure you need according to you CSS or CSS-Framework. The deafault uses the <a href="https://bulma.io/" target="_blank">Bulma.io</a> structure and classes.
+The Fieldwrapper Component wraps all the Fields. Adjust to whatever HTML structure you need according to your CSS or CSS-Framework. The default uses the <a href="https://bulma.io/" target="_blank">Bulma.io</a> structure and classes.
 
-By default it uses Material UI icons. Just remove or replace them.
+By default it uses Material UI icons. Just remove or replace them if you like.
 
 
 ### Status CSS classes
@@ -84,14 +91,15 @@ export const helpMessageClass = 'help';
 ```
 
 ### <LoadingIndicator \>
-This is rendered if isLoading is set to true. Just change the return to whatever you wish to look at while the form is in loading state.
+The LoadingIndicator rendered if isLoading is set to true. Just change the return to whatever you wish to look at while the form is in loading state.
 
 ## <Form \/>
 
-### enableReinitialize
+### enableReinitialize: Boolean
 Set to true if the initialValues change (e.g. from initially an empty string to the value of an async API call)
 
-### fields={fieldSettings}
+
+### <a name="fieldSettings"></a>fields: Object
 
 - [fieldName]
   - initialValue
@@ -107,31 +115,32 @@ const fieldSettings = {
       { type: 'min', args: [2] },
       { type: 'max', args: [50] },
     ],
-    yup: yup.string().required(), // optional: 
+    yup: yup.string().required(), // optional: overrides validations
     validationType: 'string',
     required: true,
   },
 }
 ```
 
-### disabled && isLoading
+### disabled: Boolean && isLoading: Boolean 
 disabled: Optional (default false). Sets form disabled.
 
 isLoading: Optional (default false). Sets the form disabled & displays a <LoadingIndicator \> Component. The LoadingIndicator can be changed in (shared.js)
 
 The form will be disabled if one of them is true.
 
-### onSubmit
+### onSubmit: function
 Your submit handler. Receives (values, actions). See <a href="https://formik.org/docs/api/form" target="_blank">Formik documentation</a>.
 
 
 
-## Fields
+## Field Components
 
 ### TextField
 ```js
 <TextField
   name="your-field-name"
+  // has to match fieldSettings property name
   type="text|email|tel|date ..."
   label="Your Label"
   placeholder="Your Placeholder"
@@ -143,6 +152,7 @@ Your submit handler. Receives (values, actions). See <a href="https://formik.org
 ```js
 <SelectField
    name="your-field-name"
+   // has to match fieldSettings property name
   options={[
     {
       value: "value-1",
@@ -163,6 +173,7 @@ Your submit handler. Receives (values, actions). See <a href="https://formik.org
 ```js
 <Textarea
   name="your-field-name"
+  // has to match fieldSettings property name
   type="text|email|tel|date ..."
   label="Your Label"
   placeholder="Your Placeholder"
@@ -172,7 +183,10 @@ Your submit handler. Receives (values, actions). See <a href="https://formik.org
 
 ### CheckBox
 ```js
-<CheckBox name="accept-something">
+<CheckBox 
+name="accept-something"
+// has to match fieldSettings property name
+>
   I accept some shady stuff. For more info click
   <a href="https://xyz.org" target="_blank" rel="noreferrer"> here</a>.
 </CheckBox>
@@ -183,6 +197,7 @@ Your submit handler. Receives (values, actions). See <a href="https://formik.org
 ```js
 <RadioGroup
   name="likeMusic"
+  // has to match fieldSettings property name
   options={[{ value: true, label: "Yes" }, { value: false, label: "No }]}
   label="Do you like good music?"
 />
@@ -192,3 +207,4 @@ Your submit handler. Receives (values, actions). See <a href="https://formik.org
 ```js
  <SubmitButton>Save</SubmitButton>
 ```
+
