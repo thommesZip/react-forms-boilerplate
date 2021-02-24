@@ -2,7 +2,7 @@
 
 
 # React Forms Boilerplate
-This is boilerplate code I use to build & handle forms in React. Instead of trying to build the 💍ne abstraction to rule them all, I use this as a starting point that can handle 95% of my typical use cases out of the box and adjust or extend it according to what the app needs.
+This is boilerplate code I use to build & handle forms in React. Instead of trying to build the 💍ne abstraction to rule them all, I use it as a starting point that can handle 95% of my typical use cases out of the box and adjust or extend it according to what the app needs.
 
 It is structured to be easily adjustable, with all the elements that vary from app to app (but not within an app) in the shared.js file. (HTML-wrappers for fields according to Bootstrap, Tailwind CSS, Status-classNames etc.). 
 
@@ -11,7 +11,7 @@ Form and Fields are composable, just like if you would build form HTML and you c
 ## The goal...
 ... is to have a consistent way of creating, handling and styling forms throughout the entire application with no effort, especially for applications with tons of forms.
 
-It is basically <a href="https://formik.org/docs/api/formik" target="_blank">Formik</a> & <a href="https://github.com/jquense/yup" target="_blank">Yup</a> in wrapper to create consistent HTML around the fields plus some additional features I often use. Of course this is highly opinionated, but that´s what makes it easy to use.
+It is basically <a href="https://formik.org/docs/api/formik" target="_blank">Formik</a> & <a href="https://github.com/jquense/yup" target="_blank">Yup</a> in a wrapper to create consistent HTML around fields plus some additional features I often use (loading state handling, toggling disabled state etc.). Of course this is highly opinionated, but that´s what makes it easy to use. 
 
 
 ### It does the following things:
